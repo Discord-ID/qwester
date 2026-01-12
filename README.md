@@ -2,7 +2,7 @@
 
 <img align="right" src="./assets/icon.png" width=200 alt="Discord Quest Completer logo">
 
-Extension that automatically completes multiple Discord quests spoofing. No more manually watching videos or playing games - just click a button and let it run all quests at once.
+Extension that automatically completes multiple Discord quests. No more manually watching videos or playing games - just click a button and let it run all quests at once and work for all device.
 
 Original Source from [**aamiaa**](https://gist.github.com/aamiaa/204cd9d42013ded9faf646fae7f89fbb) & [**Syncord**](https://github.com/syncordyt) 🌸
 
