@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Discord Web Quest Completer",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Complete Multi Discord Quests in the browser in one click without any manual work",
   "icons": {
     "16": "assets/icon.png",
@@ -14,19 +14,25 @@
     "activeTab"
   ],
   "host_permissions": [
-    "https://discord.com/*"
+    "https://*.discord.com/*"
   ],
   "background": {
     "service_worker": "background.js"
   },
   "content_scripts": [
     {
-      "matches": ["https://discord.com/quest-home*"],
+      "matches": [
+        "https://discord.com/quest-home*",
+        "https://ptb.discord.com/quest-home*",
+        "https://canary.discord.com/quest-home*"
+      ],
       "js": ["quest-home.js"],
       "run_at": "document_idle"
     },
     {
-      "matches": ["https://discord.com/*"],
+      "matches": [
+        "https://*.discord.com/*"
+      ],
       "js": ["user-agent-override.js"],
       "run_at": "document_start",
       "world": "MAIN"
