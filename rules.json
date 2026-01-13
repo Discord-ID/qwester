@@ -17,4 +17,4 @@
         "resourceTypes": ["main_frame", "sub_frame", "xmlhttprequest", "script", "stylesheet", "image", "font", "object", "ping", "csp_report", "media", "websocket", "other"]
       }
     }
-]
+  ]
