@@ -1,0 +1,27 @@
+{
+	"name": "qwester",
+	"version": "1.1.0",
+	"description": "Automated Discord quest completion extension with TypeScript, supporting multi-quest concurrency and desktop app spoofing via webpack injection and user-agent override.",
+	"scripts": {
+		"build": "bun run scripts/build.ts",
+		"watch": "bun tsc --watch",
+		"clean": "rm -rf dist",
+		"format": "biome check --write ./src"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.3.11",
+		"@types/bun": "latest",
+		"@types/chrome": "^0.1.33",
+		"@types/node": "^22.10.5",
+		"typescript": "^5.9.3"
+	},
+	"keywords": [
+		"discord",
+		"quest",
+		"chrome-extension"
+	],
+	"author": {
+        "name": "Nick Aidil"
+    },
+	"license": "MIT"
+}

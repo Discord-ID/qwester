@@ -1,0 +1,108 @@
+name: Build and Release
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*'
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build Extension
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Build extension
+        run: bun run build
+
+      - name: Create build archive
+        run: |
+          cd dist
+          zip -r ../discord-quest-completer-${{ github.sha }}.zip .
+          cd ..
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: discord-quest-completer-build
+          path: discord-quest-completer-${{ github.sha }}.zip
+          retention-days: 90
+
+      - name: Upload dist folder
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-folder
+          path: dist/
+          retention-days: 30
+
+  release:
+    name: Create Release
+    needs: build
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+    
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: discord-quest-completer-build
+
+      - name: Get commit hash
+        id: get_version
+        run: echo "SHORT_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+
+      - name: Read changelog
+        id: changelog
+        run: |
+          if [ -f CHANGELOG.md ]; then
+            echo "CHANGELOG<<EOF" >> $GITHUB_OUTPUT
+            cat CHANGELOG.md >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+          else
+            echo "CHANGELOG=Build ${{ steps.get_version.outputs.SHORT_SHA }}" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: discord-quest-completer-${{ github.sha }}.zip
+          tag_name: ${{ steps.get_version.outputs.SHORT_SHA }}
+          name: Build ${{ steps.get_version.outputs.SHORT_SHA }}
+          body: |
+            ## Discord Quest Completer - Build ${{ steps.get_version.outputs.SHORT_SHA }}
+            
+            ### 📝 Changes
+            ${{ steps.changelog.outputs.CHANGELOG }}
+            
+            ### 🔧 Built with
+            - TypeScript
+            - Bun (latest)
+            
+            ---
+            **Commit**: [${{ steps.get_version.outputs.SHORT_SHA }}](https://github.com/${{ github.repository }}/commit/${{ github.sha }})
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
