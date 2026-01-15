@@ -55,7 +55,7 @@ jobs:
     name: Create Release
     needs: build
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/v')
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     
     permissions:
       contents: write
@@ -73,6 +73,13 @@ jobs:
         id: get_version
         run: echo "SHORT_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
+      - name: Create and push tag
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag -f build-${{ steps.get_version.outputs.SHORT_SHA }}
+          git push -f origin build-${{ steps.get_version.outputs.SHORT_SHA }}
+
       - name: Read changelog
         id: changelog
         run: |
@@ -88,7 +95,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: discord-quest-completer-${{ github.sha }}.zip
-          tag_name: ${{ steps.get_version.outputs.SHORT_SHA }}
+          tag_name: build-${{ steps.get_version.outputs.SHORT_SHA }}
           name: Build ${{ steps.get_version.outputs.SHORT_SHA }}
           body: |
             ## Discord Quest Completer - Build ${{ steps.get_version.outputs.SHORT_SHA }}

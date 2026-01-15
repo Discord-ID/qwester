@@ -98,5 +98,7 @@ This version supports multi-quest execution on mobile with the same concurrent p
 > [!WARNING]
 > This is a tool for automating Discord quests. Use at your own risk and be aware of Discord's Terms of Service. I'm not responsible if your account gets flagged or banned.
 
+This project is provided as-is for research and educational purposes only.
+
 
 
