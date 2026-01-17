@@ -417,7 +417,7 @@ import type {
 				const winExe = app.executables?.find((x) => x.os === "win32");
 				if (winExe) exeName = winExe.name.replace(">", "");
 			}
-		} catch (_e) {
+		} catch {
 			console.warn(
 				"Discord Quest Helper: Could not fetch app details, using defaults.",
 			);
