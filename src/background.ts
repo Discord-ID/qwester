@@ -2,28 +2,6 @@ chrome.runtime.onInstalled.addListener((): void => {
 	console.log("Discord Quest Helper extension installed");
 });
 
-interface TabChangeInfo {
-	status?: string;
-}
-
-chrome.tabs.onUpdated.addListener(
-	(tabId: number, changeInfo: TabChangeInfo, tab: chrome.tabs.Tab): void => {
-		if (
-			changeInfo.status === "loading" &&
-			tab.url &&
-			tab.url.includes("discord.com")
-		) {
-			chrome.scripting
-				.executeScript({
-					target: { tabId: tabId },
-					files: ["user-agent-override.js"],
-					world: "MAIN",
-				})
-				.catch((): void => {});
-		}
-	},
-);
-
 interface ExecuteQuestCodeMessage {
 	action: "executeQuestCode";
 }

@@ -194,9 +194,15 @@
 		panel.appendChild(title);
 
 		const credit = document.createElement("p");
-		credit.textContent = "Credits by 6Together9";
 		credit.style.cssText = "margin: 0; font-size: 14px; color: #ccc;";
+		credit.innerHTML =
+			'Credits by <a href="https://github.com/nvckai/Discord-Web-Multi-Quest-Completer" target="_blank" style="color: #fff; font-weight: bold; text-decoration: none;">6Together9</a>';
 		panel.appendChild(credit);
+
+		const modified = document.createElement("p");
+		modified.textContent = "Modified by アーリヤ";
+		modified.style.cssText = "margin: 8px 0 0 0; font-size: 12px; color: #888;";
+		panel.appendChild(modified);
 
 		document.body.appendChild(panel);
 	}

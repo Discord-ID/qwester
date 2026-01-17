@@ -1,7 +1,7 @@
 {
 	"manifest_version": 3,
 	"name": "qwester",
-	"version": "1.1.0",
+	"version": "1.2.0",
 	"description": "Automated Discord quest completion extension with TypeScript, supporting multi-quest concurrency and desktop app spoofing via webpack injection and user-agent override.",
 	"icons": {
 		"16": "assets/icon.png",
@@ -25,9 +25,9 @@
 		},
 		{
 			"matches": ["https://discord.com/*"],
-			"js": ["user-agent-check.js"],
+			"js": ["user-agent-override.js"],
 			"run_at": "document_start",
-			"all_frames": false
+			"world": "MAIN"
 		}
 	],
 	"declarative_net_request": {

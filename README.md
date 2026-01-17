@@ -2,7 +2,7 @@
 
 <img align="right" src="./assets/icon.png" width=200 alt="Discord Quest Completer logo">
 
-Extension that automatically completes multiple Discord quests spoofing. No more manually watching videos or playing games - just click a button and let it run all quests at once.
+Extension that automatically completes multiple Discord quests. No more manually watching videos or playing games - just click a button and let it run all quests at once and work for all device.
 
 Original Source from [**aamiaa**](https://gist.github.com/aamiaa/204cd9d42013ded9faf646fae7f89fbb) & [**Syncord**](https://github.com/syncordyt) 🌸
 
@@ -97,6 +97,9 @@ This version supports multi-quest execution on mobile with the same concurrent p
 
 > [!WARNING]
 > This is a tool for automating Discord quests. Use at your own risk and be aware of Discord's Terms of Service. I'm not responsible if your account gets flagged or banned.
+
+> [!IMPORTANT]
+> This repository is strictly for educational purposes and security research only. It is designed to demonstrate how web APIs and user-agent spoofing work in a browser environment. Any misuse of this tool is the sole responsibility of the user. The author does not condone any actions that violate third-party Terms of Service.
 
 This project is provided as-is for research and educational purposes only.
 
