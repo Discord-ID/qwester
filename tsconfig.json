@@ -22,7 +22,8 @@
 		"noUnusedParameters": false,
 		"noImplicitReturns": true,
 		"noFallthroughCasesInSwitch": true,
-		"types": ["chrome", "bun"]
+		"types": ["chrome", "bun"],
+		"isolatedModules": false
 	},
 	"include": ["src/**/*"],
 	"exclude": ["node_modules", "dist"]
