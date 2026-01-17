@@ -81,6 +81,12 @@ type HeartbeatData = {
 	terminal?: boolean;
 };
 
+type CustomWindow = Window & {
+	webpackChunkdiscord_app?: unknown[];
+	$?: unknown;
+	DiscordNative?: unknown;
+};
+
 ((): void => {
 	function waitForWebpack(callback: (wpRequire: WebpackRequire) => void): void {
 		const checkInterval = 100;
@@ -95,24 +101,25 @@ type HeartbeatData = {
 				return;
 			}
 
-			if (typeof window.webpackChunkdiscord_app === "undefined") {
+			if (typeof (window as CustomWindow).webpackChunkdiscord_app === "undefined") {
 				attempts++;
 				setTimeout(check, checkInterval);
 				return;
 			}
 
 			try {
-				const originalJQuery = window.$;
-				delete window.$;
+				const w = window as CustomWindow;
+				const originalJQuery = w.$;
+				delete w.$;
 
-				const webpackRequire = window.webpackChunkdiscord_app.push([
+				const webpackRequire = w.webpackChunkdiscord_app?.push([
 					[Symbol()],
 					{},
 					(require: unknown) => require,
 				]) as unknown as WebpackRequire;
-				window.webpackChunkdiscord_app.pop();
+				w.webpackChunkdiscord_app?.pop();
 
-				if (originalJQuery) window.$ = originalJQuery;
+				if (originalJQuery) w.$ = originalJQuery;
 
 				if (
 					!webpackRequire ||
@@ -202,7 +209,7 @@ type HeartbeatData = {
 				`Discord Quest Helper: Found ${activeQuests.length} active quest(s).`,
 			);
 
-			const isDesktopApp = typeof window.DiscordNative !== "undefined";
+			const isDesktopApp = typeof (window as CustomWindow).DiscordNative !== "undefined";
 			if (!isDesktopApp) {
 				console.info(
 					"Discord Quest Helper: Spoofing Desktop Client via Heartbeat Simulation.",
