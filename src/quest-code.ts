@@ -1,18 +1,85 @@
-import type {
-	ApiClient,
-	ApiResponse,
-	ApplicationData,
-	DiscordQuest,
-	FakeGame,
-	FluxDispatcherType,
-	GuildVocal,
-	HeartbeatData,
-	HeartbeatResponse,
-	QuestStore,
-	RunningGame,
-	VideoProgressResponse,
-	WebpackRequire,
-} from "./types";
+// Type definitions inlined to avoid module exports
+type WebpackRequire = {
+	c: Record<string, { exports?: unknown }>;
+};
+
+type DiscordQuest = {
+	id: string;
+	config: {
+		application: { id: string; name: string };
+		messages: { questName: string };
+		expiresAt: string;
+		taskConfig?: { tasks: Record<string, { target: number }> };
+		taskConfigV2?: { tasks: Record<string, { target: number }> };
+	};
+	userStatus?: {
+		completedAt?: string;
+		enrolledAt?: string;
+		progress?: Record<string, { value: number }>;
+	};
+};
+
+type ApiClient = {
+	get: (options: { url: string }) => Promise<unknown>;
+	post: (options: { url: string; body: unknown }) => Promise<unknown>;
+};
+
+type ApiResponse<T> = { body: T };
+
+type ApplicationData = {
+	name: string;
+	executables?: Array<{ os: string; name: string }>;
+};
+
+type FakeGame = {
+	cmdLine: string;
+	exeName: string;
+	exePath: string;
+	hidden: boolean;
+	isLauncher: boolean;
+	id: string;
+	name: string;
+	pid: number;
+	pidPath: number[];
+	processName: string;
+	start: number;
+};
+
+type RunningGame = {
+	getRunningGames: () => FakeGame[];
+	getGameForPID: (pid: number) => FakeGame | undefined;
+};
+
+type QuestStore = {
+	quests: Map<string, DiscordQuest>;
+};
+
+type GuildVocal = {
+	VOCAL: Array<{ channel: { id: string } }>;
+};
+
+type FluxDispatcherType = {
+	dispatch: (event: unknown) => void;
+	subscribe: (event: string, handler: (data: unknown) => void) => void;
+	unsubscribe: (event: string, handler: (data: unknown) => void) => void;
+};
+
+type VideoProgressResponse = {
+	completed_at?: string;
+};
+
+type HeartbeatResponse = {
+	progress: Record<string, { value: number }>;
+};
+
+type HeartbeatData = {
+	userStatus: {
+		progress: Record<string, { value: number }>;
+		streamProgressSeconds?: number;
+	};
+	stream_key?: string;
+	terminal?: boolean;
+};
 
 ((): void => {
 	function waitForWebpack(callback: (wpRequire: WebpackRequire) => void): void {
