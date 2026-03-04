@@ -8,7 +8,7 @@ Original Source from [**aamiaa**](https://gist.github.com/aamiaa/204cd9d42013ded
 
 
 > [!NOTE]
-> Join Discord ID Server Support: https://discord.my.id
+> Join Discord ID Server Support: https://discord.gg/HbZEEuj4KJ
 
 ## What it does
 
@@ -84,16 +84,15 @@ Built with Manifest V3. Uses:
 - Concurrent execution with async/await and Promise.all
 ## Mobile Version Supported (Android)
 
-1. Download this extension
-2. Download Kiwi Browser: [Download Kiwi](https://github.com/kiwibrowser/src.next/releases)
-3. Open Kiwi Browser and go to `kiwi://extensions`
-   - Or tap the three dots → select "Extensions"
-4. Enable Developer mode, then tap `+ (from .zip/crx/.user.js)` and upload the downloaded extension
-5. After that, open Discord Quests page: [Quest](https://discord.com/quest-home), accept at least one quest and choose **Playing on Desktop**, then **REFRESH**
-   - A "Running Quests" button will appear. Click it and check console for progress updates
-   - If it doesn't work, refresh the quest page again
+1. Download this Extension
+2. **Download Lemur Browser:** [Download Lemur Browser on Play Store](https://play.google.com/store/apps/details?id=com.lemurbrowser.exts)
+3. Open the browser and tap the **4 Squares Icon** (on the right side) → select **"Extensions"**.
+4. Enable **Developer mode**, then tap **`+ (from .zip/crx/.user.js)`** and upload the extension file you just downloaded.
+5. Open the Discord Quests Page: [Quest](https://discord.com/quest-home), accept at least one quest, select **"Playing on Desktop"**, and then **REFRESH**.
+   - A **`Running Quests`** button should appear. Tap it and you're all set!
+   - If it doesn't appear, try refreshing the quest page again.
 
-This version supports quest execution on mobile with the same concurrent processing as desktop.
+**Notes:** This setup is optimized for mobile via Lemur Browser because of its Chrome extension support. 
 
 > [!WARNING]
 > This is a tool for automating Discord quests. Use at your own risk and be aware of Discord's Terms of Service. I'm not responsible if your account gets flagged or banned.
